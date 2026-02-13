@@ -12,7 +12,7 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec; /* Light pink background */
+            background-color: #fce4ec; /* Light pink aesthetic */
             font-family: 'Arial', sans-serif;
             text-align: center;
         }
@@ -22,10 +22,11 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 90%;
         }
 
         img {
-            width: 200px;
+            width: 250px;
             border-radius: 10px;
             margin-bottom: 20px;
         }
@@ -41,7 +42,7 @@
             align-items: center;
             gap: 20px;
             margin-top: 20px;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Ensures buttons don't break on small screens */
         }
 
         button {
@@ -50,12 +51,13 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform 0.1s ease;
         }
 
         #yes-btn {
             background-color: #4caf50;
             color: white;
+            z-index: 10; /* Keeps the growing button on top */
         }
 
         #no-btn {
@@ -67,7 +69,7 @@
 <body>
 
     <div class="container">
-        <img id="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJwamNyeGZ6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxxcaeqpIu4/giphy.gif" alt="Cute Bear">
+        <img id="gif" src="https://media.tenor.com/7YV4583yR78AAAAM/mocha.gif" alt="Mocha Bear GIF">
         
         <h1 id="question">Will you be my Valentine? ❤️</h1>
 
@@ -78,10 +80,10 @@
     </div>
 
     <script>
-        let yesButton = document.getElementById('yes-btn');
-        let noButton = document.getElementById('no-btn');
-        let question = document.getElementById('question');
-        let gif = document.getElementById('gif');
+        const yesButton = document.getElementById('yes-btn');
+        const noButton = document.getElementById('no-btn');
+        const question = document.getElementById('question');
+        const gif = document.getElementById('gif');
         
         let clickCount = 0;
         const noTexts = [
@@ -91,39 +93,36 @@
             "Think again!", 
             "Last chance!", 
             "Surely not?", 
-            "You might regret this!", 
-            "Give it another thought!", 
-            "Are you absolutely certain?", 
-            "This could be a mistake!", 
-            "Have a heart!", 
-            "Don't be so cold!", 
-            "Change of heart?", 
-            "Wouldn't you reconsider?", 
-            "Is that your final answer?", 
-            "You're breaking my heart ;("
+            "Don't do this to me...", 
+            "You're breaking my heart ;(", 
+            "I'm gonna cry...", 
+            "Okay, now you're just being mean!"
         ];
 
         function handleNo() {
-            // 1. Make the Yes button bigger
+            // 1. Make the Yes button grow exponentially
             let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = (currentSize * 1.5) + "px";
+            yesButton.style.fontSize = (currentSize * 1.4) + "px";
             yesButton.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
 
-            // 2. Change the No button text
+            // 2. Change the No button text to be more persuasive
             noButton.innerText = noTexts[clickCount % noTexts.length];
             clickCount++;
-
-            // 3. Move the No button slightly (optional)
-            const randomX = Math.random() * 20 - 10; 
-            noButton.style.transform = `translateX(${randomX}px)`;
         }
 
         function celebrate() {
-            question.innerText = "Yay! See you then! ❤️";
-            // Change to a happy GIF
-            gif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJwamNyeGZ6eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lI4bYvryT5yTC/giphy.gif";
-            // Hide the No button
+            // 1. Change the text
+            question.innerText = "Yay! See you on the 14th! ❤️";
+            
+            // 2. Change to a happy celebration GIF
+            gif.src = "https://media.tenor.com/X8_S_YshL7EAAAAM/milk-and-mocha-bear-hearts.gif";
+            
+            // 3. Hide the No button
             noButton.style.display = 'none';
+
+            // 4. Reset the Yes button to its original size
+            yesButton.style.fontSize = "18px";
+            yesButton.style.padding = "10px 20px";
         }
     </script>
 </body>
