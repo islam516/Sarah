@@ -10,7 +10,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh; /* Allow body to grow beyond the viewport height */
             margin: 0;
             background-color: #fce4ec; /* Light pink aesthetic */
             font-family: 'Arial', sans-serif;
@@ -143,9 +143,8 @@
             // 3. Hide the No button
             noButton.style.display = 'none';
 
-            // 4. Reset the Yes button to its original size
-            yesButton.style.fontSize = "18px";
-            yesButton.style.padding = "10px 20px";
+            // 4. Hide the Yes button as well
+            yesButton.style.display = 'none';
         }
     </script>
 </body>
