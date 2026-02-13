@@ -69,7 +69,8 @@
 <body>
 
     <div class="container">
-        <img id="gif" src="https://media1.tenor.com/m/_qq_gaNnw8gAAAAd/hug-squeeze.gif" alt="Mocha Bear GIF">
+        <img id="gif" src="https://media.tenor.com/ZhNxfL0GmoMAAAAm/mocha-bear-hearts.webp" alt="Mocha Bear GIF">
+        <h2 id="pleading-text" style="color: #e91e63; min-height: 30px;"></h2>
         
         <h1 id="question">Will you be my Valentine? ❤️</h1>
 
@@ -84,19 +85,30 @@
         const noButton = document.getElementById('no-btn');
         const question = document.getElementById('question');
         const gif = document.getElementById('gif');
+        const pleadingText = document.getElementById('pleading-text');
         
         let clickCount = 0;
         const noTexts = [
-            "No", 
+            "NO !?!?!?!?", 
+            "WHAAAHHHH !?!?!?!?", 
             "Are you sure?", 
             "Really sure??", 
             "Think again!", 
             "Last chance!", 
             "Surely not?", 
             "Don't do this to me...", 
-            "You're breaking my heart ;(", 
-            "I'm gonna cry...", 
-            "Okay, now you're just being mean!"
+            "That's enough, you press yes now !!!", 
+        ];
+        const noGifs = [
+            "https://media.tenor.com/UJCnZ5Naw74AAAAm/bubu-yier-iklog.webp",
+            "https://media.tenor.com/y0VmlfBByBgAAAAm/bubu-bubu-dudu.webp",
+            "https://media.tenor.com/JSkGo2B3op8AAAAM/dirt-alone.gif",
+            "https://media.tenor.com/sWXhCC4A2woAAAAm/bubu-bubu-dudu.webp",
+            "https://media.tenor.com/AJoj_bRn1j8AAAAm/you-are-a-pig-hmmm.webp",
+            "https://media.tenor.com/rwZ1KmV8ZAoAAAAm/bubu-dudu-sseeyall.webp",
+            "https://media.tenor.com/0XxZLMzjYV0AAAAm/dudu-crying-texting.webp",
+            "https://media.tenor.com/gqUkINTCyrwAAAAM/hay-nako-reika-teary-dudu.gif",
+            "https://media.tenor.com/Db-darmcAwsAAAAm/guli-kora.webp"
         ];
 
         function handleNo() {
@@ -105,17 +117,28 @@
             yesButton.style.fontSize = (currentSize * 1.4) + "px";
             yesButton.style.padding = (currentSize * 0.8) + "px " + (currentSize * 1.5) + "px";
 
-            // 2. Change the No button text to be more persuasive
-            noButton.innerText = noTexts[clickCount % noTexts.length];
+            // 2. Change the pleading text and GIF
+            pleadingText.innerText = noTexts[clickCount];
+            gif.src = noGifs[clickCount % noGifs.length]; // Use modulo for gifs to loop if needed
             clickCount++;
+
+            // 3. If it's the last message, disable the "No" button
+            if (clickCount === noTexts.length) {
+                noButton.disabled = true;
+                noButton.style.opacity = '0.5'; // Visually "dim" the button
+                noButton.style.cursor = 'not-allowed'; // Change cursor to indicate it's disabled
+            }
         }
 
         function celebrate() {
             // 1. Change the text
-            question.innerText = "Yay! See you on the 14th! 2 ❤️";
+            question.innerText = "Yay! See you tomorrow ! Love you so much ❤️❤️❤️❤️";
             
+            // Hide the pleading text
+            pleadingText.style.display = 'none';
+
             // 2. Change to a happy celebration GIF
-            gif.src = "https://tenor.com/v1KwdMFAO1Y.gif";
+            gif.src = "https://media1.tenor.com/m/1sllEEYLrrAAAAAC/happy-janmashtami.gif";
             
             // 3. Hide the No button
             noButton.style.display = 'none';
